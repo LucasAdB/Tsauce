@@ -7,9 +7,9 @@ public class Conexao {
     public static Connection Conector() {
         Connection conexao = null;
         String driver = "com.mysql.cj.jdbc.Driver";
-        String url = "jdbc:mysql://localhost:3306/senac";
-        String user = "root";
-        String passowrd = "123qwe@";
+        String url = "jdbc:mysql://localhost:3306/senac?characterEncoding=utf-8";
+        String user = "henrique";
+        String passowrd = "Dobi_203242";
 
         try {
             Class.forName(driver);

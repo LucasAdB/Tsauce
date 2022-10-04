@@ -5,17 +5,29 @@
  */
 package br.senac.telas;
 
+import br.senac.conexaoBD.Conexao;
+import java.sql.*;
+import javax.swing.JOptionPane;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
+
+
+
 /**
  *
  * @author henrique.medeiros
  */
 public class frm_Principal extends javax.swing.JFrame {
 
+    Connection conexao = null;
+
     /**
      * Creates new form frm_Principal
      */
     public frm_Principal() {
         initComponents();
+        conexao = Conexao.Conector();
     }
 
     /**
@@ -36,7 +48,7 @@ public class frm_Principal extends javax.swing.JFrame {
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
+        menGerarRelContatos = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
 
@@ -83,10 +95,20 @@ public class frm_Principal extends javax.swing.JFrame {
         jMenu4.setText("Relatorio");
 
         jMenuItem3.setText("Usuario");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
         jMenu4.add(jMenuItem3);
 
-        jMenuItem4.setText("Contato");
-        jMenu4.add(jMenuItem4);
+        menGerarRelContatos.setText("Contato");
+        menGerarRelContatos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menGerarRelContatosActionPerformed(evt);
+            }
+        });
+        jMenu4.add(menGerarRelContatos);
 
         jMenu1.add(jMenu4);
 
@@ -120,6 +142,42 @@ public class frm_Principal extends javax.swing.JFrame {
         cadastro.setVisible(true);
 
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void menGerarRelContatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menGerarRelContatosActionPerformed
+        //Chamando o relatório criado;
+
+        int comfirma = JOptionPane.showConfirmDialog(null, "imprimir relatório de contatos?", "Atenção!", JOptionPane.YES_NO_OPTION);
+
+        if (comfirma == JOptionPane.YES_OPTION) {
+            try {
+                JasperPrint imprime = JasperFillManager.fillReport("C:\\relatorios\\contatos2.jasper",null,conexao);
+                
+                
+                JasperViewer.viewReport(imprime, false);
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e);
+            }
+
+        }
+
+
+    }//GEN-LAST:event_menGerarRelContatosActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+         int comfirma = JOptionPane.showConfirmDialog(null, "imprimir relatório de usuarios?", "Atenção!", JOptionPane.YES_NO_OPTION);
+
+        if (comfirma == JOptionPane.YES_OPTION) {
+            try {
+                JasperPrint imprime = JasperFillManager.fillReport("C:\\relatorios\\usuario2.jasper",null,conexao);
+                
+                
+                JasperViewer.viewReport(imprime, false);
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e);
+            }
+
+        }
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -167,7 +225,7 @@ public class frm_Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JMenuItem menGerarRelContatos;
     // End of variables declaration//GEN-END:variables
 }

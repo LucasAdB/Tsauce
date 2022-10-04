@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.senac.telas;
 
 import java.sql.*;
@@ -47,17 +42,17 @@ public class frm_login extends javax.swing.JFrame {
             ps.setString(2, txtSenha.getText());
 
             rs = ps.executeQuery();
-            
+
             if (rs.next()) {
                 frm_Principal principal = new frm_Principal();
                 principal.setVisible(true);
                 this.dispose();
                 conexao.close();
-                
-            }else{
+
+            } else {
                 JOptionPane.showMessageDialog(null, "Usuario ou senha invalido!");
             }
-            
+
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
@@ -211,16 +206,16 @@ public class frm_login extends javax.swing.JFrame {
     private void txtUsuarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUsuarioKeyPressed
         if (evt.getKeyCode() == 10) {
             txtSenha.requestFocus();
-            
+
         }
     }//GEN-LAST:event_txtUsuarioKeyPressed
 
     private void txtSenhaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSenhaKeyPressed
-           if (evt.getKeyCode() == 10) {
+        if (evt.getKeyCode() == 10) {
             login();
-            
+
         }
-    
+
     }//GEN-LAST:event_txtSenhaKeyPressed
 
     /**

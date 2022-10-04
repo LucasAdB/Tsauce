@@ -243,6 +243,11 @@ public class frm_Cadastro_Usuario extends javax.swing.JFrame {
 
         btnAlterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/senac/icones/edit.png"))); // NOI18N
         btnAlterar.setText("ALTERAR");
+        btnAlterar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnAlterarMouseClicked(evt);
+            }
+        });
         btnAlterar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAlterarActionPerformed(evt);
@@ -267,6 +272,11 @@ public class frm_Cadastro_Usuario extends javax.swing.JFrame {
             }
         });
 
+        tbLista = new javax.swing.JTable(){
+            public boolean isCellEditable(int RowIndex, int colIndex){
+                return  false;
+            }
+        };
         tbLista.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -283,6 +293,8 @@ public class frm_Cadastro_Usuario extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tbLista.setFocusable(false);
+        tbLista.getTableHeader().setReorderingAllowed(false);
         tbLista.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbListaMouseClicked(evt);
@@ -399,7 +411,7 @@ public class frm_Cadastro_Usuario extends javax.swing.JFrame {
                     .addComponent(txtPesquisa))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(42, Short.MAX_VALUE))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -412,9 +424,7 @@ public class frm_Cadastro_Usuario extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 3, Short.MAX_VALUE))
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         setSize(new java.awt.Dimension(524, 497));
@@ -472,6 +482,14 @@ public class frm_Cadastro_Usuario extends javax.swing.JFrame {
     private void tbListaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbListaKeyPressed
         pesquisar();
     }//GEN-LAST:event_tbListaKeyPressed
+
+    private void btnAlterarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAlterarMouseClicked
+        carrega_campos();
+        btnInserir.setEnabled(false);
+        btnAlterar.setEnabled(true);
+        btnRemover.setEnabled(false);
+                
+    }//GEN-LAST:event_btnAlterarMouseClicked
 
     /**
      * @param args the command line arguments
